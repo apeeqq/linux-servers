@@ -1,3 +1,7 @@
+Edit (23.1.2025): Lisätty tiedoston tekijän nimi.
+
+*Tekijä: Aapo Tavio*
+
 # h1 Oma Linux
 
 ## Raporttien ohjeistus tiivistettynä
