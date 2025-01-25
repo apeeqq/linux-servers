@@ -24,7 +24,7 @@
 
 ## Micro-editorin asennus
 
-Käytettävä verkko: kodin LAN reitittimen kautta (kunnes toisin sanotaan)  
+Käytettävä verkko: kodin LAN reitittimen kautta (kunnes toisin sanotaan).  
 
 Tehtävän ohjeissa kehotettiin asentamaan micro-editori, mutta olen asentanut kyseisen editorin jo aikaisemmin. Editori ladataan ja asennetaan komennoilla ”sudo get-apt update” ja ”sudo get-apt install micro”. Varmistin micron olemassaolon vielä antamalla komennon micro, jonka jälkeen editori avautui, kuten kuuluikin.
 
@@ -34,37 +34,83 @@ Tehtävän ohjeissa kehotettiin asentamaan micro-editori, mutta olen asentanut k
 Asennan kolme itselleni uutta komentoriviohjelmaa Debian koneelleni. Aloitan päivittämällä paketit komennolla ”sudo apt-get update”. Tämän jälkeen hain komennolla ”apt-cache search games” pelejä, joita voin ladata. Tuloksia oli niin paljon, että etsin selaimellakin pelejä.  
 
 24.1.2025 klo 16.45:  
-Löysin it’s foss-sivustolta (https://itsfoss.com/best-command-line-games-linux/) pelin nimeltä bastet, joka on tetriksen kaltainen. Etsin vielä pelin komennolla ”apt-cache search bastet”, joka löytyikin. Seuraavaksi tarkistin ”apt-cache show bastet” -komennolla vielä, että kyseessä on oikea peli. Asennan pelin komennolla ”sudo apt-get -y install bastet”.  
+Löysin it’s foss-sivustolta (https://itsfoss.com/best-command-line-games-linux/) pelin nimeltä bastet, joka on tetriksen kaltainen. Etsin pelin komennolla ”apt-cache search bastet”, joka löytyikin. Seuraavaksi tarkistin ”apt-cache show bastet” -komennolla vielä, että kyseessä on oikea peli. Asennan pelin komennolla ”sudo apt-get -y install bastet”.  
+
+![Tiedot bastet-ohjelmasta](bastet-tiedot.png)
 
 Etsin komennolla ”find /|grep bastet|less” hakemiston, jossa kyseinen peli sijaitsee. Peli sijaitsee /usr/games hakemistossa. Käynnistin pelin menemällä kyseiseen hakemistoon ja antamalla komennon bastet.
+
+![Kuva bastet-pelistä](bastet.png)
 
 ## Toinen uusi ohjelma komentoriville
 
 24.1.2025 klo 17.00:  
 Opettaja Tero Karvinen mainitsi materiaaleissa ”nethack” nimisen pelin, joten olihan sitä kokeiltava (https://terokarvinen.com/2020/command-line-basics-revisited/?fromSearch=command%20line%20basics%20revisited). Latasin nethack pelin komennolla ”sudo apt-get -y install nethack-console”, jonka jälkeen koitin peliä. Vaikutti mielenkiintoiselta, vaikka ymmärsin lähinnä vain profiilini pelistä.
 
+![Kuva nethack pelistä](nethack.png)
+
 ## Kolmas uusi ohjelma komentoriville
 
 25.1.2025 klo 8.45:  
 Aloitin ajamalla ensin komennon ”sudo apt-get update”, koska edellisestä oli kulunut jo paljon aikaa. Tämän jälkeen katsoin githubista mielenkiintoisen laskinsovelluksen Qalculaten ”libqalculate” reposta (https://github.com/Qalculate/libqalculate). Tarkistin saatavuuden komennolla ”apt-cache search qalculate” ja asensin laskinsovelluksen komennolla ”sudo apt-get -y install qalc”.  
 
-Tämän jälkeen kokeilin ohjelmaa ajamalla komennon ”qalc” yksinkertaisilla laskutoimituksilla ja ohjelmahan vaikuttaa aivan mahtavalta! Sovellus on todella helppokäyttöinen. Kaikkien kolmen ohjelman asentaminen yhdellä komennolla tulisi muotoon: ”sudo apt-get -y install bastet nethack-console qalc”.
+Tämän jälkeen kokeilin ohjelmaa ajamalla komennon ”qalc” yksinkertaisilla laskutoimituksilla ja ohjelmahan vaikuttaa aivan mahtavalta! Sovellus on todella helppokäyttöinen.
+
+![Kuva qalc-laskimesta](qalc.png)
+
+Kaikkien kolmen ohjelman asentaminen yhdellä komennolla tulisi muotoon: ”sudo apt-get -y install bastet nethack-console qalc”.
 
 ## Filesystem Hierarchy Standard (FHS)
 
 25.1.2025 klo 9.15:  
 Suoritin komentoja, joilla esittelin tärkeitä hakemistoja hakemistopuusta. Kuvat prosesseista ovat alla:
 
+Juurihakemisto
+
+![Kuva root hakemistosta](FHD-root.png)
+
+/home/aapo/ hakemisto
+
+![Kuva /home/aapo hakemistosta](FHD-home-aapo.png)
+
+/etc/ hakemisto
+
+![Kuva /etc hakemistosta](etc.png)
+
+/etc/hostname tiedosto avattuna
+
+![Kuva hostname tiedostosta](etc-hostname.png)
+
+/media/ hakemisto
+
+![Kuva /media/ hakemistosta](media-cdrom.png)
+
+/var/log/ hakemisto
+
+![Kuva /var/log/ hakemistosta](var-log.png)
+
+/var/log/README tiedosto avattuna
+
+![Kuva /var/log/README](var-log-README.png)
+
 ## Grep-komento ja putket
 
 Seuraavaksi oli vuorossa grep-komennon havainnollistaminen, joka näkyy alla olevissa kuvissa. Valinta -w tarkoittaa, että halutaan tietty sana etsiä tarkalleen ottaen, kuten sen kirjoitamme. Valinta -r tarkoittaa, että etsiminen tapahtuu rekursiivisesti myös kaikista alikansioista. (https://geekflare.com/dev/grep-command-examples/). Putken käyttö näkyykin esim. ”ls|grep qalc” komennossa.
+
+![Kuva "ls|grep qalc" komennosta](ls-grep.png)
+
+![Kuva "grep" komennosta](grep--w--r-hello-Hello.png)
 
 ## Rauta
 
 25.1.2025 klo 10.45:  
 Asensin lshw-ohjelman komennolla ”sudo apt-get -y install lshw” ja listasin virtuaalikoneeni raudan komennolla ”sudo lshw -short -sanitize”. Listassa näkyy mm. virtualisointialustani ”system”-kohdassa, ”memory”-kohdassa keskusmuistini määrä allokoituna virtuaalikoneelleni, verkkoadapterini ”network”-kohdassa ja allokoimani ei-volatiilinen muisti.
+
+![Kuva virtuaalikoneen raudasta](lshw.png)
+
 <br>
 <br>
+
 ## Lähteet
 
 Karvinen, T. 3.2.2020. Command Line Basics Revisited. Luettavissa: https://terokarvinen.com/2020/command-line-basics-revisited/?fromSearch=command%20line%20basics%20revisited. Luettu: 25.1.2025.  
