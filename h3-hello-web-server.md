@@ -39,11 +39,19 @@ Yritin tarkastella lokeja harjoituksen vuoksi ollessani polussa: /var/log. Annoi
 Polussa: /var/log annoin edelleen komennon: ”tail apache2/error.log”, josta vastauksena sain: Permission denied. Joten seuraavaksi oli vuorossa komento: ”sudo tail apache2/error.log”, polussa: /var/log. Sain joitain ilmoituksia, mutta niissä ei ollut toistaiseksi mitään ei toivottua.  
 
 1.2.2025 klo 18.15  
-Ohjeista poiketen haluan mennä katsomaan mitä polussa /etc/apache2/sites-available sisältää, joten navigoin itseni kyiseiseen kansioon ja siellä olivat kyseisenlaiset tiedostot. Loin polkuun (jossa olen jo valmiiksi) /etc/apache2/sites-available tiedoston komennolla ”sudo nano hattu.example.com.conf ”. Yritin ensin komennolla ”sudoedit hattu.example.com.conf”, mutta tiedosto olisi mennyt väärään hakemistoon.  
+Ohjeista poiketen halusin mennä katsomaan mitä polussa /etc/apache2/sites-available on, joten navigoin itseni kyiseiseen hakemistoon ja siellä olivat kyseisenlaiset tiedostot.
 
-Laitoin sivun hattu.example.com päälle komennolla ”sudo a2ensite hattu.example.com”, jonka jälkeen käynnistin uudelleen apachen komennolla ”sudo systemctl restart apache2”. Testasin localhost-osoitteen toimivuuden selaimella.  
+![Oletus tiedostot hakemistossa](sites-available-oletukset.png)
+
+Loin polkuun (jossa olen jo valmiiksi) /etc/apache2/sites-available tiedoston komennolla ”sudo nano hattu.example.com.conf ”. Yritin ensin komennolla ”sudoedit hattu.example.com.conf”, mutta tiedosto olisi mennyt väärään hakemistoon.  
+
+Laitoin sivun hattu.example.com päälle komennolla ”sudo a2ensite hattu.example.com”, jonka jälkeen käynnistin uudelleen apachen komennolla ”sudo systemctl restart apache2”. Testasin localhost-osoitteen toimivuuden selaimella.
+
+![Kuva default localhost sivusta](localhost-default.png)
 
 ## Lokit onnistuneesta sivun lataamisesta
+
+![Onnistuneen sivun latauksen lokitiedot](sivun-lataus-lokit.png)
 
 Kuvassa näkyvä ”127.0.0.1” on apache-palvelimen IP-osoite. Seuraavana on kaksi väliviivaa. Ensimmäinen vasemmalta on asiakkaan identiteettitieto, jota ei minulla näytetty. Toinen on käyttäjän tunniste, joka pyytää resursseja.  
 
@@ -56,7 +64,7 @@ Alla oleva pyyntö eroaa vain muutamalla tavalla yllä olevasta. Polku tiedon ha
 ## Localhost-sivun muuttaminen
 
 1.2.2025 klo 20.30  
-Yritin luoda hakemistoja ja tiedoston komennolla ” mkdir -p /home/xubuntu/publicsites/hattu.example.com/index.html”, mutta minulla ei ollut oikeuksia tehdä hakemistoja ja tiedostoa. Tämän jälkeen ajoin komennon ” sudo mkdir -p /home/xubuntu/publicsites/hattu.example.com”, koska ajattelin antaa oikeudet ilman sudoa ainoastaan kansioon hattu.example.com.  
+Yritin luoda hakemistoja ja tiedoston komennolla ”mkdir -p /home/xubuntu/publicsites/hattu.example.com/index.html”, mutta minulla ei ollut oikeuksia tehdä hakemistoja ja tiedostoa. Tämän jälkeen ajoin komennon ” sudo mkdir -p /home/xubuntu/publicsites/hattu.example.com”, koska ajattelin antaa oikeudet ilman sudoa ainoastaan kansioon hattu.example.com.  
 
 Etsin netistä ohjeet oikeuksien muuttamiseen, koska en muistanut prosessia. Löysinkin freeCodeCampin sivuilta (Hira, Z. URL: https://www.freecodecamp.org/news/linux-chmod-chown-change-file-permissions/) ohjeet, miten muuttaa oikeuksia? Annoin komennon ”sudo chmod o+w /home/xubuntu/publicsites/hattu.example.com”, joka antaa kirjoitusoikeudet kaikille muille käyttäjille omistajan lisäksi. Tämän lisäksi loin tiedoston ”index.html” hakemistoon (jonne olin jo navigoinut) /home/xubuntu/publicsites/hattu.example.com komennolla ”nano index.html”. Samalla lisäsin tarvittavan sisällön tiedostooni.  
 
@@ -64,12 +72,37 @@ Etsin netistä ohjeet oikeuksien muuttamiseen, koska en muistanut prosessia. Lö
 Kävin vielä laittamassa oletussivun pois päältä komennolla ”sudo a2dissite 000-default.conf”, ollessani polussa: /etc/apache2/sites-available. Tämän jälkeen käynnistin apachen uudelleen komennolla: ”sudo systemctl reload apache2”.  
 
 2.2.2025 klo 10.30  
-Yritin mennä firefox-selaimen kautta localhost-sivulleni, mutta minulle tuli ilmoitus, että pääsy on estetty. Kävin ensin katsomassa apachen virhe lokin, joka ilmoitti DocumentRoot-polun puuttuvan. Huomasin polussa lukevan virheellisesti ”pyora.example.com”, joten menin katsomaan konfigurointi tiedostoa. Siellä olikin virheelliset tiedot poluissa. Kävin korjaamassa ne oikeiksi. Käynnistin apachen vielä uudestaan, jonka jälkeen sivu toimikin kuten pitääkin!  
+Yritin mennä firefox-selaimen kautta localhost-sivulleni, mutta minulle tuli ilmoitus, että pääsy on estetty.
+
+![Localhost-sivu estetty](localhost-forbidden.png)
+
+Kävin ensin katsomassa apachen virhe lokin, joka ilmoitti DocumentRoot-polun puuttuvan.
+
+![Virhe lokit estetystä sivusta](Error-log-forbidden-localhost.png)
+
+Huomasin polussa lukevan virheellisesti ”pyora.example.com”, joten menin katsomaan konfigurointi tiedostoa. Siellä olikin virheelliset tiedot poluissa.
+
+![Kuva virheellisestä konfigurointi tiedostosta](Virheellinen-documentroot.png)
+
+Kävin korjaamassa ne oikeiksi.
+
+![Kuva korjatusta konfigurointi tiedostosta](korjattu-documentroot.png)
+
+Käynnistin apachen vielä uudestaan, jonka jälkeen sivu toimikin kuten pitääkin!
+
+![Kuva onnistuneesta kustomoidusta sivusta](hattu-sivu.png)
 
 Tarkistin vielä sivun täyttävän HTML5 kriteerit osoitteessa: https://validator.w3.org/. Lisäsin vielä lang-attribuutin ja merkkien koodauksen (character encoding) utf-8.  
 
 2.2.2025 klo 11.00  
-Annoin komennoksi curl -I, joka palautti minulle vastauksena otsakkeita. ”HTTP/1.1 200 OK” kertoo käytetyn protokollan ja tilakoodin (joka on onnistunut). Etag-numerot kertovat resurssin versiohistorian. Jos Etag ei ole muuttunut, voidaan säästää resursseja lataamalla sama sivu muistista. (https://everything.curl.dev/http/modify/conditionals.html.)  
+Annoin komennoksi curl -I http://localhost, joka palautti minulle vastauksena otsakkeita.
+
+![Kuva curl -I otsakkeista](curl-I.png)
+
+”HTTP/1.1 200 OK” kertoo käytetyn protokollan ja tilakoodin (joka on onnistunut). Etag-numerot kertovat resurssin versiohistorian. Jos Etag ei ole muuttunut, voidaan säästää resursseja lataamalla sama sivu muistista. (https://everything.curl.dev/http/modify/conditionals.html.)  
+Ohessa vielä kuva curl-komennosta ilman valintoja.
+
+![Kuva curl-komennon vastauksesta](curl.png)
 
 <br>
 <br>
