@@ -34,7 +34,7 @@ Suoritin virtuaalisen serverin vuokraamisen isäntäkoneella ja isäntäkoneen v
 
 ## a) 7.2.2025 klo 13.30  
 ### SSH-avaimen luominen
-Aloitan luomalla ssh-avainparin virtuaalikoneellani. Ensimmäiseksi komento: ”sudo apt-get update”, jonka jälkeen ”sudo apt-get -y dist-upgrade”. Huomasin ensin komennolla ”apt search openssh client”, että minulla olikin todennäköisesti jo valmiina asennettu kyseinen ohjelma. Varmistin asian ajamalla komennon: ”apt list –installed|grep openssh”, joka ilmaisi ohjelman olevan jo valmiiksi asennettu.
+Aloitan luomalla ssh-avainparin virtuaalikoneellani. Ensimmäiseksi komento ”sudo apt-get update”, jonka jälkeen ”sudo apt-get -y dist-upgrade”. Huomasin ensin komennolla ”apt search openssh client”, että minulla olikin todennäköisesti jo valmiina asennettu kyseinen ohjelma. Varmistin asian ajamalla komennon ”apt list –installed|grep openssh”, joka ilmaisi ohjelman olevan jo valmiiksi asennettu.
 
 ![SSH-avainparin luominen](ssh-keygen.png)
 
@@ -83,7 +83,7 @@ ja vain ssh-avaimella saa ottaa etäyhteyden.
 
 ![SSH-avaimen salliminen kirjautumisessa](pubkey-auth.png)
 
-Kaikki oli kunnossa. Tämän jälkeen suljin root-käyttäjän komennolla ”sudo usermod –lock root”. Kävin vielä tarkistamassa, että root-käyttäjä oli lukittu avaamalla tiedoston polusta /etc/shadow, josta näinkin rootin olevan lukittu, koska salasanan kohdalla ei ole tiivistettä. Sen sijaan siinä on merkit: ”!*”. Lopuksi nimesin vielä Teron ohjeiden mukaan uudestaan root-käyttäjän hakemiston: .ssh, hakemistoksi nimeltä: DISABLED-ssh, joka selkeästi ilmaisee, että ssh-yhteyttä ei saa enää kyseiseen käyttäjään (Karvinen, URL: https://terokarvinen.com/linux-palvelimet/). Tämä tapahtui komennolla ”sudo mv -nv /root/.ssh /root/DISABLED-ssh/”.
+Kaikki oli kunnossa. Tämän jälkeen suljin root-käyttäjän komennolla ”sudo usermod --lock root”. Kävin vielä tarkistamassa, että root-käyttäjä oli lukittu avaamalla tiedoston polusta /etc/shadow, josta näinkin rootin olevan lukittu, koska salasanan kohdalla ei ole tiivistettä. Sen sijaan siinä on merkit: ”!*”. Lopuksi nimesin vielä Teron ohjeiden mukaan uudestaan root-käyttäjän hakemiston: .ssh, hakemistoksi nimeltä: DISABLED-ssh, joka selkeästi ilmaisee, että ssh-yhteyttä ei saa enää kyseiseen käyttäjään (Karvinen, URL: https://terokarvinen.com/linux-palvelimet/). Tämä tapahtui komennolla ”sudo mv -nv /root/.ssh /root/DISABLED-ssh/”.
 
 ### SSH-yhteyden sulkeminen root-käyttäjältä
 7.2.2025 klo 16.30  
@@ -101,15 +101,15 @@ Tämän jälkeen päivitin koneen, joten komennot ”sudo apt-get update” ja �
 ### Ohjelmien asentaminen ja palomuurin konfigurointia
 Asensin ensin helpottaakseni työskentelyäni micro-editorin, joten komennot ”sudo apt-get update” ja ”sudo apt-get install -y micro”. Tämän jälkeen tuli apachen vuoro, joten ajoin ”sudo apt-get -y install apache2”. Tuttuun tapaan edellisen tehtävän tavoin vaihdoin oletussivun komennolla: ’echo "Hey you"|sudo tee /var/www/html/index.html’.
 
-![Muutettu default-sivu](default-sivu-muutettu.jpg)
-
 Palomuuriin piti tietenkin tehdä reikä, jos haluaa sivun julkiseksi, joten komento ”sudo ufw allow 80/tcp”. Tarkastin portin 80 olevan auki kuten pitääkin.
 
 ![Portin aukaiseminen ja tarkastaminen](ufw-allow-80.png)
 
+![Muutettu default-sivu](default-sivu-muutettu.jpg)
+
 ## d) 8.2.2025 klo 9.56
 ### Name based virtual host apacheen
-Seuraavaksi ”sudoedit /etc/apache2/sites-available/new.com.conf” ja tarpeelliset name based virtual host -tiedot kyseiseen tiedostoon. Minun piti tehdä vielä uusi kansio, johon viittasin konfigurointi tiedostossa, joten komento ” sudo mkdir -p /home/websites/publicsites/new.com”. Kyseinen new.com-hakemisto oli rootin omistuksessa ja minulla ei ollut omalla käyttäjällä oikeuksia muokata hakemistoa, joten ajoin ”sudo chown -R aapo /home/websites/publicsites/new.com/”. Halusin vielä varmuuden vuoksi muilta käyttäjiltä kaikki oikeudet pois, joten ajoin ”chmod o-rwx new.com/”. En sisällyttänyt polkuna kuin new.com-hakemiston, koska olin valmiiksi polussa: /home/websites/publicsites.
+Seuraavaksi ”sudoedit /etc/apache2/sites-available/new.com.conf” ja tarpeelliset name based virtual host -tiedot kyseiseen tiedostoon. Minun piti tehdä vielä uusi kansio, johon viittasin konfigurointi tiedostossa, joten komento ”sudo mkdir -p /home/websites/publicsites/new.com”. Kyseinen new.com-hakemisto oli rootin omistuksessa ja minulla ei ollut omalla käyttäjällä oikeuksia muokata hakemistoa, joten ajoin ”sudo chown -R aapo /home/websites/publicsites/new.com/”. Halusin vielä varmuuden vuoksi muilta käyttäjiltä kaikki oikeudet pois, joten ajoin ”chmod o-rwx new.com/”. En sisällyttänyt polkuna kuin new.com-hakemiston, koska olin valmiiksi polussa: /home/websites/publicsites.
 
 8.2.2025 klo 10.24  
 Loin edelleen index.html-tiedoston polkuun: /home/websites/publicsites/new.com, jotta saisin oman sivuni näkyviin.
@@ -120,7 +120,7 @@ Oletussivu pois päältä komennolla: ”sudo a2dissite 000-default.conf” ja a
 
 Uusi sivu päälle, joten komento ”sudo a2ensite new.com.conf” ja uudelleenkäynnistys tietysti ”sudo systemctl restart apache2”. Sivulle ei päässyt, koska sivu antoi 403-koodin, joka tarkoittaa estettyä pääsyä.
 
-![Omalle sivulle pääsy estetty]()
+![Omalle sivulle pääsy estetty](oma-sivu-ei-toimi.jpg)
 
 ### Ongelman ratkaiseminen
 8.2.2025 klo 11.00  
@@ -144,7 +144,7 @@ jonka jälkeen vielä new.com.conf-tiedoston olemassaolon sites-enabled-hakemist
 
 ![Sivun aktivoinnin tarkastaminen](sites-enabled.png)
 
-Minulle tuli mieleen, että voisiko asia johtua oikeuksista, koska poistiin kaikki oikeudet muilta käyttäjiltä new.com-hakemistosta. Löysin Better Stackin (URL: https://betterstack.com/community/questions/what-permissions-should-my-website-directory-have-on-linux/) ja serverfault (URL: https://serverfault.com/questions/357108/what-permissions-should-my-website-files-folders-have-on-a-linux-webserver) -sivuilta tietoa apachen vaatimista oikeuksista hakemistoihin ja tiedostoihin.
+Minulle tuli mieleen, että voisiko asia johtua oikeuksista, koska poistin kaikki oikeudet muilta käyttäjiltä new.com-hakemistosta. Löysin Better Stackin (URL: https://betterstack.com/community/questions/what-permissions-should-my-website-directory-have-on-linux/) ja serverfault (URL: https://serverfault.com/questions/357108/what-permissions-should-my-website-files-folders-have-on-a-linux-webserver) -sivuilta tietoa apachen vaatimista oikeuksista hakemistoihin ja tiedostoihin.
 
 Aloitin prosessin antamalla lukuoikeuden hakemistoon /home/websites/publicsites/new.com/ komennolla ”chmod o+r new.com/”, olin valmiiksi jo polussa /home/websites/publicsites/. Käynnistin apachen uudelleen.
 
