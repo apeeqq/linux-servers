@@ -101,7 +101,7 @@ Tämän jälkeen päivitin koneen, joten komennot ”sudo apt-get update” ja �
 ### Ohjelmien asentaminen ja palomuurin konfigurointia
 Asensin ensin helpottaakseni työskentelyäni micro-editorin, joten komennot ”sudo apt-get update” ja ”sudo apt-get install -y micro”. Tämän jälkeen tuli apachen vuoro, joten ajoin ”sudo apt-get -y install apache2”. Tuttuun tapaan edellisen tehtävän tavoin vaihdoin oletussivun komennolla: ’echo "Hey you"|sudo tee /var/www/html/index.html’.
 
-![Muutettu default-sivu](default-sivu-muutettu.jpg)
+![Muutettu default-sivu]()
 
 Palomuuriin piti tietenkin tehdä reikä, jos haluaa sivun julkiseksi, joten komento ”sudo ufw allow 80/tcp”. Tarkastin portin 80 olevan auki kuten pitääkin.
 
@@ -120,7 +120,7 @@ Oletussivu pois päältä komennolla: ”sudo a2dissite 000-default.conf” ja a
 
 Uusi sivu päälle, joten komento ”sudo a2ensite new.com.conf” ja uudelleenkäynnistys tietysti ”sudo systemctl restart apache2”. Sivulle ei päässyt, koska sivu antoi 403-koodin, joka tarkoittaa estettyä pääsyä.
 
-![Omalle sivulle pääsy estetty](oma-sivu-ei-toimi.jpg)
+![Omalle sivulle pääsy estetty]()
 
 ### Ongelman ratkaiseminen
 8.2.2025 klo 11.00  
@@ -163,7 +163,7 @@ Curlilla toimii ainakin localhost!
 
 Ja näköjään puhelimeni selaimenkin kautta, kun syötän osoiteriville digitalocean-virtuaalikoneeni IP-osoitteen.
 
-![Oma sivu toimii selaimella](oma-sivu-toimii.jpg)
+![Oma sivu toimii selaimella]()
 
 Loppu hyvin, kaikki hyvin.
 
