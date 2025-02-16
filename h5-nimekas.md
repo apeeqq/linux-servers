@@ -39,7 +39,7 @@ En lisännyt AAAA-tietueita, koska minulla ei ole IPv6-osoite päällä VPS-kone
 ### Name Based Virtual Host domainiin  
 Aloitin tehtävät päivittämällä ensin paikallisen virtuaalikoneeni, joten komento ”sudo apt-get update” ja ”sudo apt-get -y dist-upgrade”. Tämän jälkeen otin yhteyden digitaloceanista vuokraamaani virtuaaliseen koneeseen komennolla ”ssh aapo@142.93.132.235”. Tarkastin myös, että unattended-upgrade toiminto on myös päällä tiedostopolusta: ”/var/log/unattended-upgrades/unattended-upgrades.log”. Päällähän se oli.
 
-14.2.2025 Klo 13.25  
+**14.2.2025 Klo 13.25**  
 Tavoitteeni oli luoda Name Based Virtual Host näkymään ostetussa domainissani. Ensimmäiseksi loin konfigurointitiedoston aapotavio.com.conf komennolla ”sudoedit aapotavio.com.conf” ollessani polussa /etc/apache2/sites-available.
 
 ![Konfigurointitiedoston luominen sivulle aapotavio.com](sudoedit-konf.png)
@@ -54,7 +54,7 @@ Seuraavaksi oli vuorossa index.html-tiedoston luonti polussa /home/websites/publ
 
 ![index.html luominen](index.html-aapotavio.com.png)
  
-14.2.2025 Klo 13.58  
+**14.2.2025 Klo 13.58**  
 Seuraavaksi minun piti antaa oikeudet käyttäjälleni hakemistoon aapotavio.com, joten tarkastelin edellisen viikon raporttia githubista muistin virkistämiseksi (Tavio, URL: https://github.com/apeeqq/linux-servers/blob/main/h4-maailma-kuulee.md). Muutin hakemiston omistajuuden root-käyttäjältä aapo-käyttäjälle. Siispä komentona oli ”sudo chown -R aapo /home/websites/publicsites/aapotavio.com/”.
 
 ![Omistajuuden muuttaminen hakemistoon](chown-aapotavio.com.png)
@@ -99,7 +99,7 @@ Päätin muuttaa index.html-tiedoston ryhmäoikeudet root-ryhmältä aapo-ryhmä
 
 Käytin lähteenäni terminaalin --help valintaa komennolla ”chown --help”.
 
-14.2.2025 Klo 17.35  
+**14.2.2025 Klo 17.35**  
 Sivujen linkittäminen toisiinsa oli vielä tehtävä, koska unohdin asian kirjoittaessani html-koodia. En muistanut miten linkittäminenkin tehtiin, joten katsoin GeeksforGeeks:n artikkelista asian (URL: https://www.geeksforgeeks.org/how-to-link-two-pages-in-html/). Aloitin index.html-tiedostosta linkittämisen, koska tällöin voin testata asteittain linkityksen toimimisen, koska index.html-tiedoston sivu tulee ensiksi sivuillani aina näkyviin.
 
 Joten polussa /home/websites/publicsites/aapotavio.com komento ”nano index.html”. Tein body-elementtiin muutoksen tekemällä paragraph-elementin, jonka sisään tein ankkurielementtejä, kuten alla olevasta kuvasta näkyy.
@@ -141,7 +141,7 @@ Etsin tietoa netistä ja löysinkin sitä apachen verkkosivuilta (https://httpd.
 
 ![Blog konfigurointitiedoston muokkaaminen](blog-conf-uudelleenohjaus.png)
 
-15.2.2025 Klo 10.01  
+**15.2.2025 Klo 10.01**  
 Lisättyäni tiedostoon rivin, käynnistin apachen uudelleen ”sudo systemctl restart apache2”. Uudelleenohjaus ei toiminut ja huomasin heti unohtaneeni komennon ”sudo a2ensite blog.aapotavio.com.conf” ja taas apachen käynnistys uudelleen.
 
 ![Blog sivusto toimii alidomainilla](blog-nbvh-selaimessa.png)
@@ -201,7 +201,7 @@ Myös ”host -v aapotavio.com” tuottaa vielä erilaisen vastauksen.
 Näiden perusteella voidaan sanoa, että ”eforward…” domainit ovat MX-tietueita (Mail Exchange), jotka liittyvät domainin käyttämiin sähköpostipalvelimiin. Luku ennen palvelimen nimeä ilmaisee sähköpostien käsittelyn etusijoja. Mitä pienempi luku, sitä ensisijaisempi käsittelyjärjestys sähköposteille. (Zivanov, URL: https://phoenixnap.com/kb/linux-host.) Lisäksi AAAA-tietue kertoo IPv6:n käytöstä, mutta vastauksia näyttää olevankin siinä 0, kuten pitääkin. Oletan asian ilmaisevan, että minun domain ei tue IPv6 nimikyselyitä.
 
 ### Nimikyselyt osoitteeseen jarkkonieminenareena.fi  
-15.2.2025 Klo 17.18  
+**15.2.2025 Klo 17.18**  
 Minun piti valita jokin pieni yritys, kerho tai henkilön verkkosivut, jotka katson dig ja host ohjelmilla. Valitsin Impivaaran Tenniskeskuksen, jonka domain on jarkkonieminenareena.fi.
 
 ![dig-komento osoitteeseen jarkkonieminenareena.fi](dig-jarkko.png)
@@ -225,7 +225,7 @@ Host-kyselyistä tenniskeskuksen sivuille ei tule juuri mitään uutta tietoa, p
 ![host-komennot osoitteeseen jarkkonieminenareena.fi](host-jarkko.png)
 
 ### Nimikyselyt osoitteeseen apple.com  
-15.2.2025 Klo 18.07  
+**15.2.2025 Klo 18.07**  
 Lopuksi tehtävänä oli vielä tehdä kyselyt suurelle ja kaikkien tuntemalle palvelulle. Valitsin tekeväni kyselyt applelle.
 
 ![dig-komento osoitteeseen apple.com](dig-apple.png)
