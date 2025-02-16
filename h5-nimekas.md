@@ -2,7 +2,7 @@
 
 # h5 Nimekäs
 
-Tehtävässä ostin domainin ja yhdistin sen ohjaamaan liikenteen DigitalOcean-palvelusta vuokraamalleni virtuaaliselle palvelimelle. Lisäksi konfiguroin alidomaineja, name based virtual host palveluita ja tutkin nimikyselyiden tietoja "host" ja "dig" -komennoilla. Etsin tietoa myös uusista asioista ja käsitteistä, joita minulle tuli tehtävän aikana vastaan.
+Tehtävässä ostin domainin ja yhdistin sen ohjaamaan liikenteen DigitalOcean-palvelusta vuokraamalleni virtuaaliselle palvelimelle. Lisäksi konfiguroin alidomaineja sekä name based virtual host palveluita ja tutkin nimikyselyiden tietoja "host" ja "dig" -komennoilla. Etsin tietoa myös uusista asioista ja käsitteistä, joita minulle tuli tehtävän aikana vastaan.
 
 ## Käytettävän ympäristön ominaisuudet
 
@@ -23,13 +23,13 @@ Suoritin domainin ostamisen isäntäkoneella ja isäntäkoneen virtuaalikoneella
 
 ## a)  
 ### Domainin ostaminen ja konfigurointi
-Aloitin tehtävän ostamalla domainin Namecheap.com osoitteesta, jota suositeltiin tunnilla yhtenä hyvänä vaihtoehtona. Valitsin aapotavio.com, joka oli vapaana.
+Aloitin tehtävän ostamalla domainin namecheap.com osoitteesta, jota suositeltiin tunnilla yhtenä hyvänä vaihtoehtona. Valitsin aapotavio.com, joka oli vapaana.
 
 ![Kuva vapaasta domainista](aapotavio.com.png)
 
-Muistelin tunnilta, että tietueita oli aseteltava Namecheapin valikoissa, mutta en muistanut, miten tämä tehtiin? Löysin Namecheapin ohjeista hyvät ohjeet tietueiden konfiguroimiseen (Namecheap, URL: https://www.namecheap.com/support/knowledgebase/article.aspx/319/2237/how-can-i-set-up-an-a-address-record-for-my-domain/).
+Muistelin tunnilta, että tietueita oli aseteltava Namecheapin valikoissa, mutta en muistanut, miten tämä tehtiin? Löysin Namecheapin ohjeista hyvät ohjeet tietueiden konfiguroimiseen (Namecheap. URL: https://www.namecheap.com/support/knowledgebase/article.aspx/319/2237/how-can-i-set-up-an-a-address-record-for-my-domain/).
 
-Olimme käyneet aikaisemmin Windows-palvelimet kurssilla läpi erilaisia tietueita ja mitä ne tarkoittavat, mutta en muistanut juurikaan mitään asiasta, koska kurssista on aikaa ja kyseisiä asioita ei ole tultu käsiteltyä kovinkaan usein. Luin siis tekstipätkän A-tietueista, jossa kerrottiinkin A-tietueiden olevan IPv4-osoitteille ja niiden kertovan domainiin kuuluvan IP-osoitteen (Cloudflare, URL: https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/). Lisäsin itselleni A-tietueet osoitteisiin ”aapotavio.com” ja ”www.aapotavio.com” sekä TTL (Time To Live) arvon 5 minuuttiin.
+Olimme käyneet aikaisemmin Windows-palvelimet kurssilla läpi erilaisia tietueita ja mitä ne tarkoittavat, mutta en muistanut juurikaan mitään asiasta, koska kurssista on aikaa ja kyseisiä asioita ei ole tultu käsiteltyä kovinkaan usein. Luin siis tekstipätkän A-tietueista, jossa kerrottiinkin A-tietueiden olevan IPv4-osoitteille ja niiden kertovan domainiin kuuluvan IP-osoitteen (Cloudflare. URL: https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/). Lisäsin itselleni A-tietueet osoitteisiin ”aapotavio.com” ja ”www.aapotavio.com” sekä TTL (Time To Live) arvon 5 minuuttiin.
 
 ![Kuva lisätyistä A-tietueista](tietueet.png)
 
@@ -37,7 +37,7 @@ En lisännyt AAAA-tietueita, koska minulla ei ole IPv6-osoite päällä VPS-kone
 
 ## b)	14.2.2025 Klo 12.56  
 ### Name Based Virtual Host domainiin  
-Aloitin tehtävät päivittämällä ensin paikallisen virtuaalikoneeni, joten komento ”sudo apt-get update” ja ”sudo apt-get -y dist-upgrade”. Tämän jälkeen otin yhteyden digitaloceanista vuokraamaani virtuaaliseen koneeseen komennolla ”ssh aapo@142.93.132.235”. Tarkastin myös, että unattended-upgrade toiminto on myös päällä tiedostopolusta: ”/var/log/unattended-upgrades/unattended-upgrades.log”. Päällähän se oli.
+Aloitin tehtävät päivittämällä ensin paikallisen virtuaalikoneeni, joten komento ”sudo apt-get update” ja ”sudo apt-get -y dist-upgrade”. Tämän jälkeen otin yhteyden digitaloceanista vuokraamaani virtuaaliseen koneeseen komennolla ”ssh aapo@142.93.132.235”. Tarkastin myös, että unattended-upgrade toiminto on päällä tiedostopolusta: ”/var/log/unattended-upgrades/unattended-upgrades.log”. Päällähän se oli.
 
 **14.2.2025 Klo 13.25**  
 Tavoitteeni oli luoda Name Based Virtual Host näkymään ostetussa domainissani. Ensimmäiseksi loin konfigurointitiedoston aapotavio.com.conf komennolla ”sudoedit aapotavio.com.conf” ollessani polussa /etc/apache2/sites-available.
@@ -55,7 +55,7 @@ Seuraavaksi oli vuorossa index.html-tiedoston luonti polussa /home/websites/publ
 ![index.html luominen](index.html-aapotavio.com.png)
  
 **14.2.2025 Klo 13.58**  
-Seuraavaksi minun piti antaa oikeudet käyttäjälleni hakemistoon aapotavio.com, joten tarkastelin edellisen viikon raporttia githubista muistin virkistämiseksi (Tavio, URL: https://github.com/apeeqq/linux-servers/blob/main/h4-maailma-kuulee.md). Muutin hakemiston omistajuuden root-käyttäjältä aapo-käyttäjälle. Siispä komentona oli ”sudo chown -R aapo /home/websites/publicsites/aapotavio.com/”.
+Seuraavaksi minun piti antaa oikeudet käyttäjälleni hakemistoon aapotavio.com, joten tarkastelin edellisen viikon raporttia githubista muistin virkistämiseksi (Tavio. URL: https://github.com/apeeqq/linux-servers/blob/main/h4-maailma-kuulee.md). Muutin hakemiston omistajuuden root-käyttäjältä aapo-käyttäjälle. Siispä komentona oli ”sudo chown -R aapo /home/websites/publicsites/aapotavio.com/”.
 
 ![Omistajuuden muuttaminen hakemistoon](chown-aapotavio.com.png)
 
@@ -178,7 +178,7 @@ Tehtävässä oli tarkoituksena katsoa DNS-kyselyitä ja tulkita sekä vertailla
 
 Keskityin ”answer section” kohtaan, koska se kertoo nimipalvelimelta tulleet tiedot (globalping, URL: https://blog.globalping.io/how-to-read-a-dig-result-a-guide-for-network-novices/).
 
-Stack overflow-sivustolta löytyikin lisätietoa answer-kohdan arvoista (https://stackoverflow.com/questions/20297531/meaning-of-the-five-fields-of-the-answer-section-in-dig-query). Ensimmäinen kenttä on domain, joka palautettiin (minulla kaikissa kolmessa: aapotavio.com). Seuraava kenttä kertoo TTL-arvon (Time-To-Live), joka minulla oli kahdessa ensimmäisessä vastauksessa 1772 ja kolmannessa 272. TTL-arvo ilmaistaan sekunneissa. IN-arvo kertoo luokan. IN tulee sanasta internet. Luokan oikealla puolella oleva arvo kertoo tyypin. A-tietue kertoo vastauksen olevan IPv4-osoite, joka on johdettu domainin nimestä. NS-arvo kertoo vastauksen olevan nimipalvelimesta, joka selvittää haluttua kyselyä (ClouDNS, https://www.cloudns.net/wiki/article/34/). Viimeinen kenttä vasemmalta kertoo vastauksen lähettäneen IP-osoitteen tai domain nimen.
+Stack overflow-sivustolta löytyikin lisätietoa answer-kohdan arvoista (https://stackoverflow.com/questions/20297531/meaning-of-the-five-fields-of-the-answer-section-in-dig-query). Ensimmäinen kenttä on domain, joka palautettiin (minulla kaikissa kolmessa: aapotavio.com). Seuraava kenttä kertoo TTL-arvon (Time-To-Live), joka minulla oli kahdessa ensimmäisessä vastauksessa 1772 ja kolmannessa 272. TTL-arvo ilmaistaan sekunneissa. IN-arvo kertoo luokan. IN tulee sanasta internet. Luokan oikealla puolella oleva arvo kertoo tietueen. A-tietue kertoo vastauksen olevan IPv4-osoite, joka on johdettu domainin nimestä. NS-arvo kertoo vastauksen olevan nimipalvelimesta, joka selvittää haluttua kyselyä (ClouDNS. https://www.cloudns.net/wiki/article/34/). Viimeinen kenttä vasemmalta oikealle kertoo vastauksen lähettäneen IP-osoitteen tai domain nimen.
 
 Namecheapin web-liittymästä näkyykin, että vastausten nimipalvelimet tulevat Namecheapin nimipalvelimista, jotka ovat oletuksena päällä.
 
@@ -188,7 +188,7 @@ Komennolla ”host -a aapotavio.com” DNS-kyselyn vastaus muuttuikin oleellises
 
 ![host-komento -a valinnalla osoitteeseen aapotavio.com](host-aapotavio.com.png)
 
-Tietueessa lukee ”HINFO” ja sitä seuraa merkintä ”RFC8482”. Selviteltyäni netistä asiaa, vaikuttaa HINFO-tietueen ilmaisevan ANY-tietueen kyselyiden estämistä. HINFO on määritelty kyseisessä RFC8482 dokumentissa (Abley ym. URL: https://datatracker.ietf.org/doc/html/rfc8482 ja Majkowski, URL: https://blog.cloudflare.com/rfc8482-saying-goodbye-to-any/).
+Tietueessa lukee ”HINFO” ja sitä seuraa merkintä ”RFC8482”. Selviteltyäni netistä asiaa, vaikuttaa HINFO-tietueen ilmaisevan ANY-tietueen kyselyiden estämistä. HINFO on määritelty kyseisessä RFC8482 dokumentissa (Abley ym. URL: https://datatracker.ietf.org/doc/html/rfc8482 ja Majkowski. URL: https://blog.cloudflare.com/rfc8482-saying-goodbye-to-any/).
 
 Komennolla ”host aapotavio.com” tulee puolestaan erilainen vastaus.
 
@@ -198,7 +198,7 @@ Myös ”host -v aapotavio.com” tuottaa vielä erilaisen vastauksen.
 
 ![host-komento -v valinnalla osoitteeseen aapotavio.com](host-v.png)
 
-Näiden perusteella voidaan sanoa, että ”eforward…” domainit ovat MX-tietueita (Mail Exchange), jotka liittyvät domainin käyttämiin sähköpostipalvelimiin. Luku ennen palvelimen nimeä ilmaisee sähköpostien käsittelyn etusijoja. Mitä pienempi luku, sitä ensisijaisempi käsittelyjärjestys sähköposteille. (Zivanov, URL: https://phoenixnap.com/kb/linux-host.) Lisäksi AAAA-tietue kertoo IPv6:n käytöstä, mutta vastauksia näyttää olevankin siinä 0, kuten pitääkin. Oletan asian ilmaisevan, että minun domain ei tue IPv6 nimikyselyitä.
+Näiden perusteella voidaan sanoa, että ”eforward…” domainit ovat MX-tietueita (Mail Exchange), jotka liittyvät domainin käyttämiin sähköpostipalvelimiin. Luku ennen palvelimen nimeä ilmaisee sähköpostien käsittelyn etusijoja. Mitä pienempi luku, sitä ensisijaisempi käsittelyjärjestys sähköposteille. (Zivanov. URL: https://phoenixnap.com/kb/linux-host.) Lisäksi AAAA-tietue kertoo IPv6:n käytöstä, mutta vastauksia näyttää olevankin siinä 0, kuten pitääkin. Oletan asian ilmaisevan, että minun domain ei tue IPv6 nimikyselyitä.
 
 ### Nimikyselyt osoitteeseen jarkkonieminenareena.fi  
 **15.2.2025 Klo 17.18**  
@@ -218,7 +218,7 @@ Seuraava luku ”2024101803” tarkoittaa alueen sarjanumeroa.
 
 ”604800” on umpeutumisaika (expire), jonka jälkeen toissijaisen nimipalvelimen on lakattava vastaamasta alueelle tuleviin pyyntöihin, jos ensisijainen nimipalvelin ei vastaa pyyntöihin.
 
-”600” on minimi aika, josta saadaan time-to-live arvon kanssa laskettua negatiivisten vastausten säilytyksen aika. (Wikipedia, URL: https://en.wikipedia.org/wiki/SOA_record.)
+”600” on minimi aika, josta saadaan time-to-live arvon kanssa laskettua negatiivisten vastausten säilytyksen aika. (Wikipedia. URL: https://en.wikipedia.org/wiki/SOA_record.)
 
 Host-kyselyistä tenniskeskuksen sivuille ei tule juuri mitään uutta tietoa, paitsi MX-tietueen sähköpostipalvelin, joka on ”mail1.sigmatic.fi”.
 
