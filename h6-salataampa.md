@@ -47,6 +47,8 @@ Tehtävässä hankin domainilleni TLS-sertifikaatin Let's Encryptiltä Legon avu
 ## a)	28.2.2025 Klo 14.06
 Verkkoyhteytenä minulla on WiFi yhteyspiste puhelimesta. Operaattorina toimii Telia ja ilmoitettu latauksen maksimitiedonsiirtonopeus on 300 Mb/s.
 
+## Alkutestaus ja legon asentaminen
+
 Aloitin päivittämällä paikallisen debian virtuaalikoneeni, kuten aina. Komennot ”sudo apt-get update” ja ”sudo apt-get dist-upgrade”. Sitten kirjautuminen etäpalvelimelleni, joka on vuokrattu Digitalocean palvelusta, käyttämällä vuokrattua domainiani namecheapista komennolla ”ssh aapo@aapotavio.com”.
 
 ![ssh kirjautuminen](ssh-kirjautuminen-domainilla.png)
@@ -67,7 +69,11 @@ Minun oli asennettava lego-ohjelma koneelleni, joka on siis sertifikaattien hall
 
 ![legon asentaminen](install-lego.png)
 
-**28.2.2025 Klo 15.55**
+<br>
+<br>
+
+## Testiympäristössä sertifikaatin hankkiminen
+**28.2.2025 Klo 15.55**  
 Ensimmäiseksi aloitin tekemään uuden hakemiston lego-sertifikaateilleni. Polussa /home/websites komento ”mkdir lego”, jolla sain hakemiston luotua.
 
 ![lego hakemiston luominen](mkdir-lego.png)
@@ -82,7 +88,11 @@ Testaus onnistui ja päätinkin vielä tarkistaa, että minulle oli ilmestynyt t
 
 ![varmennus testin onnistumisesta](staging-environment-varmennus.png)
 
-**28.2.2025 Klo 18.43**
+<br>
+<br>
+
+## Tuotantoympäristössä sertifikaatin hakeminen
+**28.2.2025 Klo 18.43**  
 Verkkoyhteyteni vaihtui tässä vaiheessa kotini reitittimen kautta tulevaan valokuituun maksimilatausnopeutena 200 Mb/s.
 
 Poistin seuraavaksi hakemiston lego, polusta /home/websites/, joka sisälsi staging-vaiheen testitietoja. Näin ollen asioihin sai selkeyttä, koska tarpeettomat testitiedot eivät olleet enää koneella.
@@ -98,7 +108,11 @@ Seuraavaksi ajoin saman komennon kuin aikaisemmin staging-ympäristöllä, mutta
 
 Ja taas yliviivaukset tietoturvasyistä.
 
-**28.2.2025 Klo 19.25**
+<br>
+<br>
+
+## Konfigurointimuutokset
+**28.2.2025 Klo 19.25**  
 Oli vuorossa sivuni konfigurointitiedoston muokkaaminen, jotta saan sertifikaatin käyttööni sivulleni. Tutulla komennolla ”sudoedit aapotavio.com.conf” polussa /etc/apache2/sites-available sain konfigurointitiedoston auki. Lisäsin uuden virtualhostin porttiin 443, joka on oletuksena https-protokollaa hyödyntävä portti. SSLEnginelle arvo ”on” ja sertifikaatin tiedostopolku arvoksi SSLCertificateFile. SSLCertificateKeyFilelle arvoksi tiedostopolku key-tiedostoon.
 
 ![kuva konfigurointitiedostosta](aapotavio.com.conf.png)
@@ -115,7 +129,7 @@ En pystynyt käynnistämään uudelleen apachea, mutta ajoin ”sudo apache2ctl 
 
 ![epäonnistunut testi](configtest.png)
 
-**28.2.2025 Klo 20.02**
+**28.2.2025 Klo 20.02**  
 
 Huomasin tiedostopolusta puuttuvan hakemisto certificates, joten lisäsin sen konfigurointitiedostoon. Lisäksi sama hakemisto certificates puuttui key-tiedostoon osoittavasta polusta, joten lisäsin hakemiston siihenkin polkuun.
 
@@ -133,6 +147,10 @@ Varmistin portin 443 olevan vielä auki katsomalla palomuurin tilan komennolla �
 
 ![palomuurin tilan tarkastaminen](ufw-status-enabled.png)
 
+<br>
+<br>
+
+## Salatun yhteyden testaus
 Kokeilin isäntäkoneeni (windows 11) kanssa selaimella salatun yhteyden toimivuuden.
 
 ![testi selaimella](selain-https.png)
@@ -145,7 +163,11 @@ Lisäksi testasin toimivuuden vielä komennolla ”curl -I https://aapotavio.com
 
 ![curl https porttiin](curl-I.png)
 
-**2.3.2025 Klo 11.28**
+<br>
+<br>
+
+## Sertifikaatin uusiminen automaattisesti
+**2.3.2025 Klo 11.28**  
 Aloitin vapaaehtoista tehtävää tekemään tutustumalla crontabiin. Minulla menikin jonkin aikaa selvitellessä asiaa, koska scriptitkin mainittiin useassa lähteessä ja en ole koskaan tehnyt scriptejä.
 
 Ymmärsin, että crontabiin voisi suoraan tehdä ilman scriptiä automaation sertifikaatin uusimisesta. Olin tutustunut aiheeseen tutkiessani asiaa paljon, joten ajattelin scriptin tekemisen olevan mielenkiintoisempi ja opettavaisempi tapa. Käytin lähteinäni seuraavia materiaaleja ja yhdistelin niistä tietoja sekä yritin tehdä niistä oikeanlaisia johtopäätöksiä:
@@ -160,14 +182,14 @@ Ymmärsin, että crontabiin voisi suoraan tehdä ilman scriptiä automaation ser
 Loin ensimmäiseksi polkuun /opt hakemiston, johon teen lego scriptini. Komennolla ”sudo mkdir -p lego/letsencrypt/scripts” tein hakemiston,  
 -p valinta tarkoittaa kaikkien hakemistojen tekemistä ilmaistussa polussa, jos niitä ei ole valmiiksi jo luotu.
 
-**2.3.2025 Klo 11.59**
+**2.3.2025 Klo 11.59**  
 Oli aika tehdä uusi script-tiedosto, joten polkuun /opt/lego/letsencrypt/scripts komento ”sudoedit renew_certificate.sh”.
 
 ![script sertifikaatin uusimiseen](script-renew-yliviivattu.png)
 
 Laitoin punaista väriä sähköpostiosoitteeni päälle tietoturvasyistä.
 
-**2.3.2025 Klo 17.40**
+**2.3.2025 Klo 17.40**  
 Seuraavaksi tarkastin cronin aktiivisuuden ajamalla ”sudo service cron status”.
 
 ![cronin tilan tarkastaminen](cron-status.png)
@@ -178,7 +200,7 @@ Esimerkiksi tässä lähteessä mainittiin, että päivittäminen tulee tehdä a
 
 Löysin Let’s Encryptin sivuilta tiedon, että vaikka laittaisi sertifikaatin uusimisen päivittäin crontabilla, sitä ei uusita kuitenkaan kuin aikaisintaan 30pv ennen sertifikaatin umpeutumista. Jos ehto ei täyty sertifikaattia ei uusita. Päivittäin on hyvä kuitenkin ajastaa tarkistus, jotta sertifikaatti ei pääse tahattomasti vanhenemaan. (URL: https://community.letsencrypt.org/t/solved-how-often-to-renew/13678.)
 
-**2.3.2025 Klo 19.00**
+**2.3.2025 Klo 19.00**  
 Aloitin crontabin tekemisen komennolla ”crontab -e”. Tämän jälkeen lisäsin tiedostoon alla olevat tiedot
 
 ![crontabin konfiguroiminen](crontab.png)
@@ -192,12 +214,16 @@ Kuvassa vasemmalta alkaen:
 - * = viikonpäivä (tarkoittaa tapauksessa jokaista viikonpäivää)
 - /opt/lego/letsencrypt/scripts/renew_certificate.sh = polku script-tiedostoon, joka ajetaan
 
-Tarkastin, että crontab tehtäviin oli tullu käyttäjälleni kyseinen tehtävä.
+Tarkastin, että crontab tehtäviin oli tullut käyttäjälleni kyseinen tehtävä.
 
 ![kuva crontab tehtävistä](crontab-l.png)
 
 Siellä alimmaisena se tehtävä oli.
 
+<br>
+<br>
+
+## Oikeuksien tarkastelu ja muokkaaminen
 Tarkastin vielä, että käyttäjäni voi ajaa scriptin. Huomasin, että aapo-käyttäjällä ei ole oikeuksia suorittaa scriptiä.
 
 ![scriptin oikeudet](ls-l-scripts.png)
@@ -220,6 +246,7 @@ Nyt script ajetaan joka päivä klo 5.18.
 
 ## b) 2.3.2025 Klo 20.05
 
+## Salatun yhteyden testaus web-ohjelmalla
 Tehtävässä piti suorittaa TLS-testi yleisellä laadunvarmistustyökalulla. Valitsin SSL Labs-sivuston, joka testaa siis salattua yhteyttä web-palvelimelleni (URL: https://www.ssllabs.com/ssltest/). Testituloksia tuli paljon ja yritin valita tärkeimmät.
 
 ![raportti tls yhteydestä](SSL-report-1.png)
@@ -239,6 +266,9 @@ Ylhäällä olevassa kuvassa näkyy puutteena DNS CAA (Domain Name Service Certi
 ”Chrome 49/XP SP3” tarkoittaa chrome selaimen versiota 49, joka on jäänyt Windows XP käyttöjärjestelmän viimeiseksi chromen versioksi. ”XP” tarkoittaa tässä siis Windows XP:tä, jota ei ole pitkään aikaan tuettu Microsoftilta, joten virheen voi jättää huomiotta. (Google. URL: https://support.google.com/chrome/thread/2588030?hl=en.)
 
 Huomionarvoista on, että minulla on salattu yhteys vain domaineihin aapotavio.com ja www.aapotavio.com. Salattua yhteyttä ei siis ole alidomaineilleni, mutta aion lisätä niillekin salauksen myöhemmin toistamalla tässä raportissa tehtyjä asioita. Ja osin toki muokkaamalla vain nykyisiä tiedostoja.
+
+<br>
+<br>
 
 ## Lähteet
 
