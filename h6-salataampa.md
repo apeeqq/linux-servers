@@ -13,6 +13,7 @@ Tehtävässä hankin domainilleni TLS-sertifikaatin Let's Encryptiltä Legon avu
 
 (Internet Security Research Group. URL: https://letsencrypt.org/how-it-works/)
 
+<br>
 
 - Olemassa olevalla web-palvelimella voi varmentaa domainin käyttämällä legoa sertifikaattihallinnoijana
 - On tärkeätä muistaa sisällyttää asetuksiin valinta, jolla voidaan hoitaa varmistustehtävä, joka annetaan CA:n toimesta.
@@ -20,6 +21,7 @@ Tehtävässä hankin domainilleni TLS-sertifikaatin Let's Encryptiltä Legon avu
 
 (Lange. URL: https://go-acme.github.io/lego/usage/cli/obtain-a-certificate/index.html#using-an-existing-running-web-server)
 
+<br>
 
 - Apache demonilla käytettäessä name based virtual hostia, on virtual host tiedostoon lisättävä:
  >-SSLEngine
