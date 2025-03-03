@@ -95,10 +95,12 @@ Seuraavaksi ajoin saman komennon kuin aikaisemmin staging-ympäristöllä, mutta
 
 ![pyyntö tuotantosertifikaatista](tuotanto-sertifikaattipyynto-yliviivattu.png)
 
+Ja taas yliviivaukset tietoturvasyistä.
+
 **28.2.2025 Klo 19.25**
 Oli vuorossa sivuni konfigurointitiedoston muokkaaminen, jotta saan sertifikaatin käyttööni sivulleni. Tutulla komennolla ”sudoedit aapotavio.com.conf” polussa /etc/apache2/sites-available sain konfigurointitiedoston auki. Lisäsin uuden virtualhostin porttiin 443, joka on oletuksena https-protokollaa hyödyntävä portti. SSLEnginelle arvo ”on” ja sertifikaatin tiedostopolku arvoksi SSLCertificateFile. SSLCertificateKeyFilelle arvoksi tiedostopolku key-tiedostoon.
 
-![kuva konfigurointitiedostosta](aapotavio.com.conf)
+![kuva konfigurointitiedostosta](aapotavio.com.conf.png)
 
 Tämän jälkeen komento ”sudo a2enmod ssl”, jolla laitetaan ssl-moduuli aktiiviseksi (Stack Exchange Inc. URL: https://serverfault.com/questions/1146970/apache2-not-listening-on-ssl-on-ubuntu).
 
