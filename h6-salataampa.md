@@ -91,7 +91,8 @@ Kokeilin mielenkiinnosta v ja i -valintoja rm-komennossa, koska varsinkin i-vali
 
 ![testihakemistojen poistaminen](rm-lego.png)
 
-Seuraavaksi ajoin saman komennon kuin aikaisemmin staging-ympäristöllä, mutta en sisällyttänyt server-valintaa pyynnössäni, koska kyseinen valinta mahdollisti juuri staging-ympäristöön kyselyn. Toinen asia, jota muokkasin tuotanto-ympäristöön tarkoitetulla pyynnöllä, oli valinta --http.webroot, jonka ohjasin uuteen hakemistooni /home/websites/lego_certificates/.
+Seuraavaksi ajoin saman komennon kuin aikaisemmin staging-ympäristöllä, mutta en sisällyttänyt server-valintaa pyynnössäni, koska kyseinen valinta mahdollisti juuri staging-ympäristöön kyselyn. Toinen asia, jota muokkasin tuotanto-ympäristöön tarkoitetulla pyynnöllä, oli valinta  
+--http.webroot, jonka ohjasin uuteen hakemistooni /home/websites/lego_certificates/.
 
 ![pyyntö tuotantosertifikaatista](tuotanto-sertifikaattipyynto-yliviivattu.png)
 
@@ -156,7 +157,8 @@ Ymmärsin, että crontabiin voisi suoraan tehdä ilman scriptiä automaation ser
 - Langen (URL: https://go-acme.github.io/lego/usage/cli/obtain-a-certificate/)
 - Hiran (URL: https://www.freecodecamp.org/news/bash-scripting-tutorial-linux-shell-script-and-command-line-for-beginners/#heading-how-to-create-and-execute-bash-scripts)
 
-Loin ensimmäiseksi polkuun /opt hakemiston, johon teen lego scriptini. Komennolla ”sudo mkdir -p lego/letsencrypt/scripts” tein hakemiston, -p valinta tarkoittaa kaikkien hakemistojen tekemistä ilmaistussa polussa, jos niitä ei ole valmiiksi jo luotu.
+Loin ensimmäiseksi polkuun /opt hakemiston, johon teen lego scriptini. Komennolla ”sudo mkdir -p lego/letsencrypt/scripts” tein hakemiston,  
+-p valinta tarkoittaa kaikkien hakemistojen tekemistä ilmaistussa polussa, jos niitä ei ole valmiiksi jo luotu.
 
 **2.3.2025 Klo 11.59**
 Oli aika tehdä uusi script-tiedosto, joten polkuun /opt/lego/letsencrypt/scripts komento ”sudoedit renew_certificate.sh”.
