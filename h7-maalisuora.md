@@ -32,6 +32,8 @@ Komennossa:
 -	“gcc” = C ohjelmointikieli
 -	“openjdk-17-jdk” = Java ohjelmointikieli
 
+### Python
+
 Ensimmäiseksi kirjoitan ja ajan pythonilla tehtävän. Loin ensimmäiseksi python-tiedoston kotihakemistooni */home/aapo* komennolla ”micro heiaapo.py”. Tiedoston päätteellä .py ilmaisen tiedoston olevan python-tiedosto.
 
 ![Python tiedoston luonti mikrolla](heiaapo-py.png)
@@ -47,6 +49,7 @@ Tämän jälkeen ajoin ohjelman komennolla ”python3 heiaapo.py”.
 
 ![Python tiedoston ajaminen](python-heiaapo.png)
 
+### C-kieli
 **7.3.2025 Klo 13.02**  
 Seuraavaksi oli C-kielen vuoro. Minulla ei ollut kokemusta lainkaan C:stä, joten turvauduin opettajan materiaaleihin (Karvinen. URL: https://terokarvinen.com/2018/hello-python3-bash-c-c-go-lua-ruby-java-programming-languages-on-ubuntu-18-04/).
 
@@ -69,10 +72,11 @@ Tässä tapauksessa ”heiaapoc” tuli tiedostonimeksi.
 
 ![Compileriin lisääminen](gcc.png)
 
-Oli aika ajaa ohjelma polussa */home/aapo* ”komennolla ./heiaapoc”.
+Oli aika ajaa ohjelma polussa */home/aapo* komennolla "./heiaapoc”.
 
 ![C-tiedoston ajaminen](heiaapo-output.png)
 
+### Java
 **7.3.2025 Klo 13.50**  
 Kolmantena kielenä oli Javan vuoro. Javakin pitää ajaa compilerin kautta, joten samanlainen kuvio oli tiedossa kuin C:n kanssakin.
 
@@ -87,12 +91,12 @@ Lisäsin alla olevat tiedot tiedostoon:
 -	”public” = avoinna koko sovellukselle
 -	”class HeiAapo” = luokka, jonka nimi on HeiAapo.
 -	”static” = kertoo muuttujan tai metodin olevan luokka
--	”void” = metodilla ei ole paluuarvoa
+-	”void” = metodilla ei ole paluuarvoa  
 (GeeksforGeeks. URL: https://www.geeksforgeeks.org/java-keywords/)
 
 -	”main” = metodin nimi
 -	”String” = ennalta määritetty luokan nimi
--	”args” = muuttujan nimi
+-	”args” = muuttujan nimi  
 (GeeksforGeeks. URL: https://www.geeksforgeeks.org/java-identifiers/)
 
 -	’{ System.out.println(”Hei Maailma”); }’ = antaa näytölle näkyviin määritellyt parametrit.
