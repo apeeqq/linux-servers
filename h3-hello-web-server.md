@@ -1,3 +1,5 @@
+Edit (11.3.2025): Rivin 60 http-pyyntöön sisältyvän tiedonsiirron määrään liittyvä virhe korjattu. Virheellinen 0B, oikea 289B.
+
 *Tekijä: Aapo Tavio*
 
 # h3 Hello Web Server
@@ -57,7 +59,7 @@ Kuvassa näkyvä ”127.0.0.1” on apache-palvelimen IP-osoite. Seuraavana on k
 
 Seuraavana näkyy päivämäärä ja kellonaika. Olettaisin ”+0200” olevan ilmoitus aikavyöhykkeestäni. En löytänyt asiasta varmaa tietoa, mutta usealla sivulla kohdassa oli merkintä GMT, joten olettaisin asian olevan aikavyöhykkeeni. (Esim. GeeksforGeeks:n sivulla: https://www.geeksforgeeks.org/state-the-core-components-of-an-http-response/)  
 
-”GET / HTTP/1.1” tarkoittaa get-metodia, jolla pyydetään juuresta ”/” tietoa http/1.1 protokollalla. ”200” on tilakoodi, joka tässä yhteydessä kertoo onnistuneesta suorituksesta. Seuraavana oleva ”-” ilmaisee asiakkaalle siirretyn tiedon määrän, jota tässä tapauksessa ei ole ollenkaan. "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0" on asiakkaan käyttämä selain.  
+”GET / HTTP/1.1” tarkoittaa get-metodia, jolla pyydetään juuresta ”/” tietoa http/1.1 protokollalla. ”200” on tilakoodi, joka tässä yhteydessä kertoo onnistuneesta suorituksesta. Seuraavana oleva ”289” ilmaisee asiakkaalle siirretyn tiedon määrän, joka on tässä tapauksessa 289B. "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0" on asiakkaan käyttämä selain.  
 (W3schools. URL: https://www.w3schools.com/Tags/ref_httpmethods.asp, Fitzpatrick, S. URL: https://www.sumologic.com/blog/apache-access-log/, Wikipedia. URL: https://en.wikipedia.org/wiki/HTTP.)  
 
 Alla oleva pyyntö eroaa vain muutamalla tavalla yllä olevasta. Polku tiedon hakemiseen on ”/favicon.ico”. Tilakoodi on myös eri: 404, joka merkitsee resurssien hakemisen epäonnistumista. Asiakkaalle siirretyn tiedon määrä on kuitenkin 487B. ”http://localhost/” viittaa osoitteeseen, josta tietoja pyydettiin. (Wikipedia. URL: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes, https://en.wikipedia.org/wiki/Favicon.)  
