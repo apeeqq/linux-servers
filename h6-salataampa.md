@@ -1,3 +1,5 @@
+Edit (11.3.2025): Muutettu raportin ulkoasun muotoilua.
+
 *Tekijä: Aapo Tavio*
 
 # h6 Salataampa
@@ -17,22 +19,22 @@ Tehtävässä hankin domainilleni TLS-sertifikaatin Let's Encryptiltä Legon avu
 
 - Olemassa olevalla web-palvelimella voi varmentaa domainin käyttämällä legoa sertifikaattihallinnoijana
 - On tärkeätä muistaa sisällyttää asetuksiin valinta, jolla voidaan hoitaa varmistustehtävä, joka annetaan CA:n toimesta.
-  >-Esim. --http.webroot valinta tiedostoon, jolla on tarkoitus hoitaa CA:n edellyttämä tehtävä domainin varmistamisesta olemassa olevalla web-palvelimella.
+  >- Esim. --http.webroot valinta tiedostoon, jolla on tarkoitus hoitaa CA:n edellyttämä tehtävä domainin varmistamisesta olemassa olevalla web-palvelimella.
 
 (Lange. URL: https://go-acme.github.io/lego/usage/cli/obtain-a-certificate/index.html#using-an-existing-running-web-server)
 
 <br>
 
 - Apache demonilla käytettäessä name based virtual hostia, on virtual host tiedostoon lisättävä:
- >-SSLEngine
- >-SSLCertificateFile
- >-SSLCertificateKeyFile
+  >- SSLEngine
+  >- SSLCertificateFile
+  >- SSLCertificateKeyFile
 
 (The Apache Software Foundation. URL: https://httpd.apache.org/docs/2.4/ssl/ssl_howto.html#configexample)
 
 ## Käytettävän ympäristön ominaisuudet
 
-- Isäntä:
+- Isäntä
   >- HP Laptop 15s-eq3xxx  
   >- Microsoft Windows 11 Home (versio 24H2)  
   >- AMD Ryzen 7 5825U, Radeon Graphics  
